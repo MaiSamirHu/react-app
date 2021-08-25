@@ -27,7 +27,7 @@ export class CommentForm extends Component{
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render(){
@@ -106,7 +106,23 @@ export class CommentForm extends Component{
         );
     };
 
-    function RenderComments({comments,postComment,dishId}){
+    // function RenderComments({comments}){
+    //     if(comments!=null)
+    //         return(
+    //             <div className="col-12 col-md-5 m-1">
+    //                 <h4>Comments</h4>
+    //                 <ul className="list-unstyled">
+    //                     {comments.map((comment)=>{
+    //                         <li key={commment.id}>
+    //                             <p>{comment.comment}</p>
+    //                             <p>--{commment.author},{new }</p>
+    //                         </li>
+    //                     })}
+    //                 </ul>
+    //             </div>
+    //         )
+    // }
+    function RenderComments({comments,addComment,dishId}){
 
         
         if(comments==null){
@@ -130,7 +146,7 @@ export class CommentForm extends Component{
                     <ul className='list-unstyled'>
                         {commentListItems}
                     </ul>
-                    <CommentForm dishId={dishId} postComment={postComment}/>
+                    <CommentForm dishId={dishId} addComment={addComment} />
                 </div>
             );
         
@@ -164,8 +180,9 @@ export class CommentForm extends Component{
 
             <div className="row">
             <RenderDish dish={props.dish}/>
-                <RenderComments comments={props.comments} postComment={props.postComment}
-                        dishId={props.dish.id}/>
+                <RenderComments comments={props.comments} 
+                        dishId={props.dish.id}
+                        addComment={props.addComment}/>
                 
             </div>
             </div>

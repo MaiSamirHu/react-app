@@ -30,7 +30,7 @@ export class CommentForm extends Component{
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render(){
@@ -109,49 +109,35 @@ export class CommentForm extends Component{
         );
     };
 
-    // function RenderComments({comments}){
-    //     if(comments!=null)
-    //         return(
-    //             <div className="col-12 col-md-5 m-1">
-    //                 <h4>Comments</h4>
-    //                 <ul className="list-unstyled">
-    //                     {comments.map((comment)=>{
-    //                         <li key={commment.id}>
-    //                             <p>{comment.comment}</p>
-    //                             <p>--{commment.author},{new }</p>
-    //                         </li>
-    //                     })}
-    //                 </ul>
-    //             </div>
-    //         )
-    // }
-    function RenderComments({comments,addComment,dishId}){
+    function RenderComments({comments,postComment,dishId}){
 
         
-        if(comments==null){
+        if(comments!=null){
             return(
-                <div></div>
-            );
-        }
-
-        
-            const commentListItems=comments.map(comment=>{
-                return(
+                <div className='col-12 col-md-5 m-1'>
+                    <h4>Comments</h4>
+                    <ul className='list-unstyled'>
+                        {comments.map((comment)=>{
+                    return(
                     <li key={comment.id}>
                         <p>{comment.comment}</p>
                         <p>--{comment.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                     </li>
                 );
-            });
-            return(
-                <div className='col-12 col-md-5 m-1'>
-                    <h4>Comments</h4>
-                    <ul className='list-unstyled'>
-                        {commentListItems}
+                    })}
                     </ul>
-                    <CommentForm dishId={dishId} addComment={addComment} />
+                    <CommentForm dishId={dishId} postComment={postComment} />
                 </div>
             );
+        }
+
+        else{
+            return(
+                <div>
+
+                </div>
+            );
+        }
         
     };
 
@@ -203,8 +189,9 @@ export class CommentForm extends Component{
             <div className="row">
             <RenderDish dish={props.dish}/>
                 <RenderComments comments={props.comments} 
+                        postComment={props.postComment}
                         dishId={props.dish.id}
-                        addComment={props.addComment}/>
+                        />
                 
             </div>
             </div>

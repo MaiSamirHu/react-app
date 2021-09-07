@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## failed to Fetch
+if you see the message on website that failed to fetch then steps to follow
+
+1)Open the command prompt and change directory to json-server
+2)Then run the following command
+json-server --watch db.json -d 2000 -p 3001
+
+this will make your json server live on your local machine
